@@ -19,6 +19,8 @@ import ForgotPassword from '../Login/ForgotPassword'
 import HRIssues from '../HR/HRIssues'
 import HRLeaves from '../HR/HRLeaves'
 import HREvents from '../HR/HREvents'
+import HREmployeeCrud from '../HR/HREmployeeCrud'
+import HRAddEmployee from '../HR/HRAddEmployee'
 
 export default function Routing() {
   return (
@@ -42,6 +44,9 @@ export default function Routing() {
         <Route path='/hrevents' element={<HREvents />}></Route>
         <Route path='/hrissues' element={<HRIssues />}></Route>
         <Route path='/hrleaves' element={<HRLeaves />}></Route>
+        <Route path='/hremployeecrud' element={<HREmployeeCrud />}></Route>
+        <Route path='/hraddemployee' element={<HRAddEmployee />}></Route>
+
         <Route path='/editprofile' element={<EditProfile />}></Route>
         <Route path='/passwordchange' element={<PasswordChange />}></Route>
         <Route path='/emailchange' element={<EmailChange />}></Route>
