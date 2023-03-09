@@ -3,14 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
-export default function EmailChange(props) {
-  const EmpObject = props.object
-  const [email, setEmail] = useState(EmpObject.emp.email);
+export default function EmailChange() {
+  const empString = sessionStorage.getItem("empString");
+  const emp = JSON.parse(empString);
+  const [email, setEmail] = useState(emp.email);
   const [status, setStatus] = useState(false);
+
+  function updateSessionObject(){
+    emp.employee_id = emp.employee_id;
+    emp.address = emp.address;
+    emp.email = email;
+    emp.firstName = emp.firstName;
+    emp.lastName = emp.lastName;
+    emp.password = emp.password;
+    emp.phone = emp.phone;
+    emp.role = emp.role;
+    const updatedEmpString = JSON.stringify(emp);
+    sessionStorage.setItem('empString', updatedEmpString);
+}
 
   const handleOnSubmit=(e)=>{
     e.preventDefault();
-    axios.put('http://localhost:8000/employee/updateemail/',EmpObject.emp)
+    emp.email = email;
+    axios.put('http://localhost:8000/employee/updateemail/',emp)
     .then(response=>{
         const emp = response.data
         console.log(emp);
@@ -20,6 +35,7 @@ export default function EmailChange(props) {
         setStatus(true);
     })
     .catch(error=>{console.log(error);})
+    updateSessionObject();
   }
   return (
     <div>

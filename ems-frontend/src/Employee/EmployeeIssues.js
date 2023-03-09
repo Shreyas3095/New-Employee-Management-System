@@ -4,11 +4,14 @@ import React, { useEffect, useState } from 'react'
 export default function EmployeeIssues() {
   const [toggle, setToggle] = useState(false);
   const employee_id = sessionStorage.getItem('employee_id');
-  const [IssueList, setIssueList] = useState();
+  const [IssueList, setIssueList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/hr/getbyid/${employee_id}`)
-    .then(response=>{setIssueList(response.data)})
+    axios.get(`http://localhost:8000/issue/getissue/${employee_id}`)
+    .then(response=>{
+      console.log(response.data);
+      setIssueList(response.data) 
+    })
     //var IssueList = response.data
   })
   const handleAddIssue = () => {

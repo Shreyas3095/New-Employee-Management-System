@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function EmployeeDashboard(props) {
-  const EmpObject = props.object;
+export default function EmployeeDashboard() {
+  const empString = sessionStorage.getItem("empString");
+  const emp = JSON.parse(empString);
   return (
     <>
     <span><h3>Employee Details</h3></span>
@@ -9,23 +10,23 @@ export default function EmployeeDashboard(props) {
     <tbody>
       <tr>
         <th scope="row">Name</th>
-        <td scope="row">{EmpObject.emp.firstName} {EmpObject.emp.lastName}</td>
+        <td scope="row">{emp.firstName} {emp.lastName}</td>
       </tr>
       <tr>
         <th scope="row">Role</th>
-        <td>{EmpObject.emp.role}</td>
+        <td>{emp.role}</td>
       </tr>
       <tr>
         <th scope="row">Email</th>
-        <td>{EmpObject.emp.email}</td>
+        <td>{emp.email}</td>
       </tr>
       <tr>
         <th scope="row">Phone</th>
-        <td>{EmpObject.emp.phone}</td>
+        <td>{emp.phone}</td>
       </tr>
       <tr>
         <th scope="row">Address</th>
-        <td>{EmpObject.emp.address}</td>
+        <td>{emp.address}</td>
       </tr>
     </tbody>
   </table>

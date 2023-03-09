@@ -4,14 +4,14 @@ import axios from 'axios';
 export default function PasswordChange() {
   const empString = sessionStorage.getItem("empString");
   const emp = JSON.parse(empString);
-  console.log(EmpObject);
   const [newpassword, setNewPassword] = useState("");
   const [reenterpassword, setReEnterPassword] = useState();
   const [status, setStatus] = useState(false);
-
+  
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    axios.put('http://localhost:8000/employee/updatepassword/', EmpObject.emp)
+    emp.password = reenterpassword;
+    axios.put('http://localhost:8000/employee/updatepassword/', emp)
       .then(response => {
         const emp = response.data
         console.log(emp);
