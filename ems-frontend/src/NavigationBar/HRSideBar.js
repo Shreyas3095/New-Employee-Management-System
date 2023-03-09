@@ -5,6 +5,7 @@ import EmailChange from '../CommonFunctionalities/EmailChange';
 import PasswordChange from '../CommonFunctionalities/PasswordChange';
 import HRDashboard from '../HR/HRDashboard';
 import HRDocuments from '../HR/HRDocuments';
+import HREvents from '../HR/HREvents';
 import HRIssues from '../HR/HRIssues';
 import HRLeaves from '../HR/HRLeaves';
 
@@ -32,7 +33,11 @@ export default function HRSideBar() {
                       </li>
                       <li>
                           <button class="nav-link px-0 align-middle" onClick={()=>{setMenu("HRIssues")}}>
-                              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline"> Review Issues</span> </button>
+                              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Review Issues</span> </button>
+                      </li>
+                      <li>
+                          <button class="nav-link px-0 align-middle" onClick={()=>{setMenu("HREvents")}}>
+                              <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Create Events</span> </button>
                       </li>
                       <li>
                           <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -64,6 +69,7 @@ export default function HRSideBar() {
               {menu === "HRDocuments" && <HRDocuments />}
               {menu === "HRLeaves" && <HRLeaves />}
               {menu === "HRIssues" && <HRIssues />}
+              {menu === "HRIssues" && <HREvents />}
               {menu === "EditProfile" && <EditProfile />}
               {menu === "ChangePassword" && <PasswordChange />}
               {menu === "ChangeEmail" && <EmailChange />}

@@ -18,6 +18,7 @@ import SignUp from '../Login/SignUp'
 import ForgotPassword from '../Login/ForgotPassword'
 import HRIssues from '../HR/HRIssues'
 import HRLeaves from '../HR/HRLeaves'
+import HREvents from '../HR/HREvents'
 
 export default function Routing() {
   return (
@@ -38,6 +39,7 @@ export default function Routing() {
 
         <Route path='/hrsidebar' element={<HRSideBar />}></Route>
         <Route path="/hrdashboard" element={<HRDashboard />}></Route>
+        <Route path='/hrevents' element={<HREvents />}></Route>
         <Route path='/hrissues' element={<HRIssues />}></Route>
         <Route path='/hrleaves' element={<HRLeaves />}></Route>
         <Route path='/editprofile' element={<EditProfile />}></Route>
