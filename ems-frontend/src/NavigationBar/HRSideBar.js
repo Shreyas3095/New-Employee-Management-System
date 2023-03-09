@@ -1,6 +1,5 @@
-import React from 'react'
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import EditProfile from '../CommonFunctionalities/EditProfile';
 import EmailChange from '../CommonFunctionalities/EmailChange';
 import PasswordChange from '../CommonFunctionalities/PasswordChange';
@@ -11,8 +10,6 @@ import HRLeaves from '../HR/HRLeaves';
 
 export default function HRSideBar() {
     const navigate = useNavigate();
-    const location = useLocation();
-    const HRObject = location.state;
     const [menu, setMenu] = useState("HRDashboard");
     return (
       <div>
@@ -63,13 +60,13 @@ export default function HRSideBar() {
               </div>
           </div>
           <div class="col py-3">
-              {menu === "HRDashboard" && <HRDashboard object={HRObject}/>}
+              {menu === "HRDashboard" && <HRDashboard />}
               {menu === "HRDocuments" && <HRDocuments />}
               {menu === "HRLeaves" && <HRLeaves />}
               {menu === "HRIssues" && <HRIssues />}
-              {menu === "EditProfile" && <EditProfile object={HRObject} />}
-              {menu === "ChangePassword" && <PasswordChange object={HRObject} />}
-              {menu === "ChangeEmail" && <EmailChange object={HRObject} />}
+              {menu === "EditProfile" && <EditProfile />}
+              {menu === "ChangePassword" && <PasswordChange />}
+              {menu === "ChangeEmail" && <EmailChange />}
           </div>
       </div>
   </div>

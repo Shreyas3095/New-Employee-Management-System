@@ -1,23 +1,27 @@
 import React, { useState } from 'react'
 import NavBar from '../NavigationBar/NavBar'
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
 export default function Login(){
+  
   const [employee_id, setEmployee_id] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const handleSignIn = (e)=>{
     e.preventDefault();
     axios.post("http://localhost:8000/login/getemployee",{employee_id,password})
-    .then(response=>{ const emp = response.data
-    if( emp.role === "HR")
+    .then(response=>{ 
+      const empString = JSON.stringify(response.data)
+      console.log("empString = ",empString);
+      sessionStorage.setItem('empString',empString);
+    if( response.data.role === "HR")
     {
-      navigate('/hrsidebar',{state:{emp}})
+      navigate('/hrsidebar')
     }
     else
     {
-      navigate('/employeesidebar',{state:{emp}})
+      navigate('/employeesidebar')
     }}).catch(error=>{console.log(error);})
 
   }
@@ -32,27 +36,28 @@ export default function Login(){
     <div>
         <NavBar></NavBar>
     </div>
-    <main class="form-signin">
+    <main className="form-signin">
     <form>
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
 
-    <div class="form-floating">
-      <input type="text" class="form-control" id="employeeid" placeholder="provided in email"
+    <div className="form-floating">
+      <input type="text" className="form-control" id="employeeid" placeholder="provided in email"
         value={employee_id} onChange={(e)=>{setEmployee_id(e.target.value)}}
       />
-      <label htmlFor="employeeid">Employee ID</label>
+      <label htmlFor="employeeid">Enter Your Email</label>
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="password" placeholder="Password"
+    <div className="form-floating mt-2">
+      <input type="password" className="form-control" id="password" placeholder="Password"
         value={password} onChange={(e)=>{setPassword(e.target.value)}}
       />
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password">Enter Your Password</label>
     </div>
-    <button class="w-100 btn btn-lg btn-primary form-button" type="submit" onClick={handleSignIn}>Sign in</button>
-    <button class="w-100 btn btn-lg btn-primary form-button" type="submit" onClick={handleSignUp}>Sign up</button>
-    <button class="w-100 btn btn-lg btn-primary form-button" type="submit" onClick={handleForgotPassword}>Forgot password</button>
+    <button className="w-100 btn btn-lg btn-primary form-button" type="submit" onClick={handleSignIn}>Sign in</button>
+    <button className="w-100 btn btn-lg btn-primary form-button" type="submit" onClick={handleSignUp}>Sign up</button>
+    <button className="w-100 btn btn-lg btn-primary form-button" type="submit" onClick={handleForgotPassword}>Forgot password</button>
   </form>
   </main>
     </>
   )
 }
+

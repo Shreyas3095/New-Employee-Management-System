@@ -29,7 +29,7 @@ export default function SignUp() {
       />
       <label for="employeeid">Employee ID</label>
     </div>
-    <p>Employee id is provided on registered email id</p>
+    <small className='text-primary'>Employee id is provided on registered email id</small>
     <div class="form-floating">
       <input type="password" class="form-control" id="password" placeholder="Password"
         value={password} onChange={(e)=>{setPassword(e.target.value)}}
@@ -42,10 +42,11 @@ export default function SignUp() {
       />
       <label for="repassword">Re-enter password</label>
     </div>
-    <div>{password === repassword ? <p>Entered Password matches</p> : <p>Entered Password does not matches</p>}</div>
+    <div>{password === repassword ? <p className='text-success'>Entered Password matches</p> : <p className='text-danger'>Entered Password does not matches</p>}</div>
     <button class="w-100 btn btn-lg btn-primary form-button" type="submit" onClick={handleOnClick}>Sign up</button>
   </form>
   </main>
   </>
   )
 }
+
