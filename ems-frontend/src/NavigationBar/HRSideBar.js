@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import EditProfile from '../CommonFunctionalities/EditProfile';
 import EmailChange from '../CommonFunctionalities/EmailChange';
 import PasswordChange from '../CommonFunctionalities/PasswordChange';
@@ -10,6 +10,7 @@ import HRIssues from '../HR/HRIssues';
 import HRLeaves from '../HR/HRLeaves';
 
 export default function HRSideBar() {
+    const navigate = useNavigate();
     const location = useLocation();
     const HRObject = location.state;
     const [menu, setMenu] = useState("HRDashboard");
@@ -52,6 +53,13 @@ export default function HRSideBar() {
                           </ul>
                       </li>
                   </ul>
+                  <ul id="logout" class=" nav-item nav nav-pills flex-column mb-0 align-items-center align-items-sm-start">
+                                <li>
+                                    <button class="nav-link align-middle px-0" onClick={() => { navigate("/login") }}>
+                                        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
+                                    </button>
+                                </li>
+                            </ul>
               </div>
           </div>
           <div class="col py-3">

@@ -2,7 +2,7 @@ import React from 'react'
 import {Routes, Route} from 'react-router-dom'
 import Home from '../Home/Home'
 import EmployeeLeaves from '../Employee/EmployeeLeaves'
-import EmployeeAttendance from '../Employee/EmployeeAttendance'
+import EmployeeEvents from '../Employee/EmployeeEvents'
 import EmployeeIssues from '../Employee/EmployeeIssues'
 import EditProfile from '../CommonFunctionalities/EditProfile'
 import PasswordChange from '../CommonFunctionalities/PasswordChange'
@@ -16,6 +16,8 @@ import EmployeeSideBar from '../NavigationBar/EmployeeSideBar'
 import HRSideBar from '../NavigationBar/HRSideBar'
 import SignUp from '../Login/SignUp'
 import ForgotPassword from '../Login/ForgotPassword'
+import HRIssues from '../HR/HRIssues'
+import HRLeaves from '../HR/HRLeaves'
 
 export default function Routing() {
   return (
@@ -32,10 +34,12 @@ export default function Routing() {
         <Route path="/employeedashboard" element={<EmployeeDashboard />}></Route>
         <Route path="/employeeleaves" element={<EmployeeLeaves />}></Route>
         <Route path='/employeeissues' element={<EmployeeIssues />}></Route>
-        <Route path='/employeeattendance' element={<EmployeeAttendance />}></Route>
+        <Route path='/employeeevents' element={<EmployeeEvents />}></Route>
 
         <Route path='/hrsidebar' element={<HRSideBar />}></Route>
         <Route path="/hrdashboard" element={<HRDashboard />}></Route>
+        <Route path='/hrissues' element={<HRIssues />}></Route>
+        <Route path='/hrleaves' element={<HRLeaves />}></Route>
         <Route path='/editprofile' element={<EditProfile />}></Route>
         <Route path='/passwordchange' element={<PasswordChange />}></Route>
         <Route path='/emailchange' element={<EmailChange />}></Route>

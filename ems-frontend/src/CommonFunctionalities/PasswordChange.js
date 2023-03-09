@@ -31,13 +31,13 @@ export default function PasswordChange(props) {
       <div>
           <div class="mb-3 w-25">
           <label for="newpassword" class="form-label">Enter new password</label>
-          <input type="text" class="form-control" id="newpassword"
+          <input type="password" class="form-control" id="newpassword"
             value={newpassword} onChange={(e)=>{setNewPassword(e.target.value)}}
           />
         </div>
         <div class="mb-3 w-25">
           <label for="reenterpassword" class="form-label">Re-enter password</label>
-          <input type="text" class="form-control" id="reenterpassword"
+          <input type="password" class="form-control" id="reenterpassword"
             value={reenterpassword} onChange={(e)=>{setReEnterPassword(e.target.value)}}
           />
         </div>

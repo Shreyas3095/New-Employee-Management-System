@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import EditProfile from '../CommonFunctionalities/EditProfile';
 import EmailChange from '../CommonFunctionalities/EmailChange';
 import PasswordChange from '../CommonFunctionalities/PasswordChange';
-import EmployeeAttendance from '../Employee/EmployeeAttendance';
+import EmployeeEvents from '../Employee/EmployeeEvents';
 import EmployeeDashboard from '../Employee/EmployeeDashboard';
 import EmployeeIssues from '../Employee/EmployeeIssues';
 import EmployeeLeaves from '../Employee/EmployeeLeaves';
@@ -29,8 +29,8 @@ export default function EmployeeSideBar() {
                                     </button>
                                 </li>
                                 <li>
-                                    <button class="nav-link px-0 align-middle" onClick={() => { setMenu("EmployeeAttendance") }}>
-                                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Attendance</span></button>
+                                    <button class="nav-link px-0 align-middle" onClick={() => { setMenu("EmployeeEvents") }}>
+                                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Events</span></button>
                                 </li>
                                 <li>
                                     <button class="nav-link px-0 align-middle" onClick={() => { setMenu("EmployeeIssues") }}>
@@ -53,7 +53,7 @@ export default function EmployeeSideBar() {
                                 </li>
                             </ul>
                             <ul id="logout" class=" nav-item nav nav-pills flex-column mb-0 align-items-center align-items-sm-start">
-                            <li>
+                                <li>
                                     <button class="nav-link align-middle px-0" onClick={() => { navigate("/login") }}>
                                         <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
                                     </button>
@@ -64,7 +64,7 @@ export default function EmployeeSideBar() {
                     <div class="col py-3">
                         {menu === "EmployeeDashboard" && <EmployeeDashboard object={EmpObject} />}
                         {menu === "EmployeeLeaves" && <EmployeeLeaves />}
-                        {menu === "EmployeeAttendance" && <EmployeeAttendance />}
+                        {menu === "EmployeeEvents" && <EmployeeEvents />}
                         {menu === "EmployeeIssues" && <EmployeeIssues />}
                         {menu === "EditProfile" && <EditProfile object={EmpObject} />}
                         {menu === "ChangePassword" && <PasswordChange object={EmpObject} />}
