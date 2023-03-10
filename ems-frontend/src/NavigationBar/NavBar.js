@@ -5,7 +5,7 @@ export default function NavBar() {
     <>
       <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg">
         <div class="container-fluid">
-          <a href="/" class="navbar-brand">Navbar</a>
+          <a href="/" class="navbar-brand">Employee Management System</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

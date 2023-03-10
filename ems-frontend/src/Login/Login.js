@@ -14,22 +14,20 @@ export default function Login() {
       .then(response => {
         const empString = JSON.stringify(response.data)
         sessionStorage.setItem('empString', empString);
-        if(response.status === 200)
-        {
-        if (response.data.role === "HR") {
-          navigate('/hrsidebar')
+        if (response.status === 200) {
+          if (response.data.role === "HR") {
+            navigate('/hrsidebar')
+          }
+          else {
+            navigate('/employeesidebar')
+          }
         }
         else {
-          navigate('/employeesidebar')
+          alert(
+            "Incorrect Password"
+          )
+          navigate("/")
         }
-      }
-      else
-      {
-        alert(
-          "Incorrect Password"
-        )
-        navigate("/")
-      }
 
       })
       .catch(error => { console.log(error); })

@@ -16,8 +16,10 @@ export default function EmployeeIssues() {
     const temp2=JSON.parse(temp);
     setEmployee(temp2);
     console.log(employee);
+    const employee_id=temp2.employee_id;
+    console.log((employee_id));
 
-    axios.get(`http://localhost:8000/issue/getissue/${temp2.employee_id}`)
+    axios.get(`http://localhost:8000/issue/getissue/${employee_id}`)
     .then(response=>
       {
         console.log("useEffect");
@@ -28,26 +30,51 @@ export default function EmployeeIssues() {
         console.log(issues)
       })
       .catch(error=>{
-        console.log("Event error");
+        console.log("Issue error");
       })
 
   },[])
+
+  function stat  (status)
+  {
+    if(status)
+    {
+      return "Solved"
+    }
+    else{return "Pending"}
+
+  }
 
   const handleAddIssue = () => {
     setToggle(true);
   }
   const handleFormSubmit = () => {
-    setToggle(false);
-    axios.post("http://localhost:8000/issue/getissue/addnew",{title,description,status,employee})
+    const employee_id=employee.employee_id;
+    console.log(employee_id);
+    axios.post(`http://localhost:8000/issue/addnew/${employee_id}`,{title,description,status,employee})
     .then(response=>{
       alert("Issue Created Successfully");
-      const issueString=sessionStorage.getItem('issueString');
-      let issueJson=JSON.parse(issueString);
-      let temp=[...issueJson];
-      temp.push(response.data);
-      setIssues(temp);
-
+      axios.get(`http://localhost:8000/issue/getissue/${employee_id}`)
+    .then(response=>
+      {
+        console.log("useEffect");
+        console.log(response.data);
+        const issueString=JSON.stringify(response.data);
+        sessionStorage.setItem('issueString',issueString);
+        setIssues(response.data)
+        console.log(issues)
+      })
+      .catch(error=>{
+        console.log("Issue error");
+      })
+      // const issueString=sessionStorage.getItem('issueString');
+      // let issueJson=JSON.parse(issueString);
+      // let temp=[...issueJson];
+      // temp.push(response.data);
+      // setIssues(temp);
+      
     })
+    setToggle(false);
   }
   return (
     <div>
@@ -56,33 +83,37 @@ export default function EmployeeIssues() {
       </div>
       <div>
         {toggle?
-        <div>
-          <form class="form-sign-in">
-            <label htmlFor='title'>Select Issue type</label>
-            <select id='title'>
+        <div className='mt-5 mb-5 d-flex justify-content-center '>
+        <div className='card col-md-5 '>
+          <form className="form-sign-in">
+            <label htmlFor='title'><b>Select Issue type </b></label>
+            <select id='title'
+            value={title} onChange={(e)=>{setTitle(e.target.value)}}
+            required>
               <option value="select">Select Issue</option>
               <option value="Dispute">Dispute</option>
               <option value="Technical">Technical</option>
               <option value="Transport">Transport</option>
               <option value="Infrastructural">Infrastructural</option>
             </select>
-            <label htmlFor='desc'>Description</label>
-            
+            <div className='mt-4'>
+            <label htmlFor='desc'><b>Description</b></label>
             <input type="text" id='desc'
               value={description} onChange={(e)=>{setDescription(e.target.value)}}
                 required>
 
                 </input>
-            <button className='btn btn-primary' onClick={handleFormSubmit}>Submit</button>
+                </div>
+            <button className='btn btn-primary mt-5 mb-3' onClick={handleFormSubmit}>Submit</button>
           </form>
+        </div>
         </div>
         :
         <></>}
-      </div>
+      </div >
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Issue Id</th>
             <th scope="col">Type</th>
             <th scope="col">Description</th>
             <th scope="col">Status</th>
@@ -90,17 +121,15 @@ export default function EmployeeIssues() {
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
             <td>Technical</td>
             <td>Keyboard Not Working</td>
             <td>Pending</td>
             </tr>
             {issues.map(issue=>(
               <tr key={issue.issue_id}>
-                <th>{issue.id}</th>
                 <td>{issue.title}</td>
                 <td>{issue.description}</td>
-                <td>{issue.status}</td>
+                <td>{stat(issue.status)}</td>
               </tr>
             ))}
         </tbody>

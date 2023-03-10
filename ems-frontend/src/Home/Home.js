@@ -3,11 +3,10 @@ import NavBar from '../NavigationBar/NavBar'
 import img1 from '../Images/img1.jpg';
 import img2 from '../Images/img2.jpg';
 import img3 from '../Images/img3.jpg';
-import Footer from './Footer';
 
 export default function Home() {
   return (
-    <div style={{ backgroundColor: 'green' }}>
+    <div>
       <div>
         <NavBar></NavBar>
       </div>

@@ -59,7 +59,7 @@ export default function HRSideBar() {
                                     </ul>
                                 </li>
                             </ul>
-                            <ul id="logout" class=" nav-item nav nav-pills flex-column mb-0 align-items-center align-items-sm-start">
+                            <ul id="logout" class=" nav-item nav nav-pills flex-column mb-5 align-items-center align-items-sm-start">
                                 <li>
                                     <button class="nav-link align-middle px-0" onClick={() => { navigate("/login") }}>
                                         <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
