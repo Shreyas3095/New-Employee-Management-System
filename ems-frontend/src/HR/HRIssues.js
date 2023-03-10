@@ -23,7 +23,9 @@ export default function HRIssues() {
   },[])
   
   const handleMarkAsRead= () =>{
-    
+    var button = document.getElementById("markasread")
+    button.style.backgroundColor = "grey";
+    button.ariaDisabled = true;
   }
   
   return (
@@ -53,7 +55,7 @@ export default function HRIssues() {
               <td>{issue.employee.firstName}</td> 
               <td>{issue.title}</td>
               <td>{issue.description}</td>
-              <td><button type='button' className='btn btn-primary' onClick={handleMarkAsRead}>Mark as read</button>
+              <td><button type='button' id="markasread" className='btn btn-primary' onClick={handleMarkAsRead} >Mark as read</button>
             </td>
           </tr>
             })
