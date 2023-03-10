@@ -1,24 +1,53 @@
+import React, { useState,useEffect } from 'react'
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
 
 export default function EmployeeIssues() {
   const [toggle, setToggle] = useState(false);
-  const employee_id = sessionStorage.getItem('employee_id');
-  const [IssueList, setIssueList] = useState([]);
+  const [issues, setIssues]= useState([]);
+  const[description,setDescription]=useState('');
+  const [title , setTitle]=useState('');
+  const [employee , setEmployee]=useState({});
+  const [status , setStatus]=useState(false);
 
-  useEffect(() => {
-    axios.get(`http://localhost:8000/issue/getissue/${employee_id}`)
-    .then(response=>{
-      console.log(response.data);
-      setIssueList(response.data) 
-    })
-    //var IssueList = response.data
-  })
+
+
+  useEffect(()=>{
+    const temp = sessionStorage.getItem('empString')
+    const temp2=JSON.parse(temp);
+    setEmployee(temp2);
+    console.log(employee);
+
+    axios.get(`http://localhost:8000/issue/getissue/${temp2.employee_id}`)
+    .then(response=>
+      {
+        console.log("useEffect");
+        
+        const issueString=JSON.stringify(response.data);
+        sessionStorage.setItem('issueString',issueString);
+        setIssues(response.data)
+        console.log(issues)
+      })
+      .catch(error=>{
+        console.log("Event error");
+      })
+
+  },[])
+
   const handleAddIssue = () => {
     setToggle(true);
   }
   const handleFormSubmit = () => {
     setToggle(false);
+    axios.post("http://localhost:8000/issue/getissue/addnew",{title,description,status,employee})
+    .then(response=>{
+      alert("Issue Created Successfully");
+      const issueString=sessionStorage.getItem('issueString');
+      let issueJson=JSON.parse(issueString);
+      let temp=[...issueJson];
+      temp.push(response.data);
+      setIssues(temp);
+
+    })
   }
   return (
     <div>
@@ -26,49 +55,56 @@ export default function EmployeeIssues() {
         <button className='btn btn-primary' type='button' onClick={handleAddIssue}>Add Issue</button>
       </div>
       <div>
-        {toggle ?
-          <div>
-            <form class="form-signin">
-              <label htmlFor='type'>Select Issue type</label>
-              <select id='type'>
-                <option value="select">Select Issue</option>
-                <option value="Dispute">Dispute</option>
-                <option value="Technical">Technical</option>
-                <option value="Transport">Transport</option>
-                <option value="Infrastructural">Infrastructural</option>
-              </select>
-              <label htmlFor='desc'>Description</label>
-              <input type="text" id='desc'></input>
-              <button className='btn btn-primary' onClick={handleFormSubmit}>Submit</button>
-            </form>
-          </div>
-          :
-          <></>}
+        {toggle?
+        <div>
+          <form class="form-sign-in">
+            <label htmlFor='title'>Select Issue type</label>
+            <select id='title'>
+              <option value="select">Select Issue</option>
+              <option value="Dispute">Dispute</option>
+              <option value="Technical">Technical</option>
+              <option value="Transport">Transport</option>
+              <option value="Infrastructural">Infrastructural</option>
+            </select>
+            <label htmlFor='desc'>Description</label>
+            
+            <input type="text" id='desc'
+              value={description} onChange={(e)=>{setDescription(e.target.value)}}
+                required>
+
+                </input>
+            <button className='btn btn-primary' onClick={handleFormSubmit}>Submit</button>
+          </form>
+        </div>
+        :
+        <></>}
       </div>
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Leave Id</th>
-            <th scope="col">From</th>
-            <th scope="col">To</th>
+            <th scope="col">Issue Id</th>
             <th scope="col">Type</th>
+            <th scope="col">Description</th>
             <th scope="col">Status</th>
-            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          {
-            IssueList.map((i) => (
-              <tr key={i.leave_id}>
-                <td>{i.start_date}</td>
-                <td>{i.end_date}</td>
-                <td>{i.type}</td>
-                <td>{i.status}</td>
-                <td><button type='button' className='btn btn-primary'>Delete</button></td>
+          <tr>
+            <td>1</td>
+            <td>Technical</td>
+            <td>Keyboard Not Working</td>
+            <td>Pending</td>
+            </tr>
+            {issues.map(issue=>(
+              <tr key={issue.issue_id}>
+                <th>{issue.id}</th>
+                <td>{issue.title}</td>
+                <td>{issue.description}</td>
+                <td>{issue.status}</td>
               </tr>
-            ))
-          }
+            ))}
         </tbody>
+
       </table>
     </div>
   )

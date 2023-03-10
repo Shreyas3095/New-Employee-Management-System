@@ -16,7 +16,7 @@ export default function HRAddEmployee() {
         }
         axios.post("http://localhost:8000/hr/addnew",emp)
         .then(response=>{
-            if(response.status == 200)
+            if(response.status === 200)
             {
                 alert(
                     "Employee added successfully."
@@ -61,6 +61,7 @@ export default function HRAddEmployee() {
 
                                     <button className="btn btn-success " style={{ marginTop: "10px" }} onClick={handleSave}>Save</button>
                                 </form>
+                                <a href='/hrsidebar'><button className='btn btn-primary position-relative top-0 start-50 translate-middle'>Back to Dashboard</button></a>
                             </div>
                         </div>
                     </div>

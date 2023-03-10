@@ -4,15 +4,28 @@ import axios from 'axios';
 
 export default function HRIssues() {
   
-  const [allIssues, setAllIssues] = useState([]);
+  const[data,setData]=useState([]);
+  
   useEffect(()=>{
+    async function fetchData(){
     axios.get("http://localhost:8000/issue/getall")
-    .then(response=>{
-      setAllIssues(response.data)
-      console.log("set = ",allIssues);
-    })
-    },[])
+    .then(response=>
+      {
+        setData(response.data);
+        console.log(data);
+      })
+      .catch(error=>{
+        console.log("Issue error");
+      })
+    }
+    fetchData();
+
+  },[])
+  
+  const handleMarkAsRead= () =>{
     
+  }
+  
   return (
     <div>
       <h3>Employee Issues</h3>
@@ -27,18 +40,26 @@ export default function HRIssues() {
           </tr>
         </thead>
         <tbody>
-          {
-            allIssues.map(issue=>{
+          <tr>
+            <td>1</td>
+            <td>Jhon Doe</td>
+            <td>Missing</td>
+            <td>Not Found</td>
+            <td><button type='button' className='btn btn-primary'>Mark as read</button></td>
+          </tr>
+          {data.map(issue=>{
               <tr key={issue.issue_id}>
               <td>{issue.issue_id}</td>
               <td>{issue.employee.firstName}</td> 
               <td>{issue.title}</td>
               <td>{issue.description}</td>
-              <td><button type='button' className='btn btn-primary'>Mark as read</button>
+              <td><button type='button' className='btn btn-primary' onClick={handleMarkAsRead}>Mark as read</button>
             </td>
           </tr>
             })
           }
+           
+            
         </tbody>
       </table>
     </div>

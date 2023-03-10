@@ -20,6 +20,7 @@ export default function HREmployeeCrud() {
                 <h2 className="text-left">Employees List</h2>
                 <div>
                     <a href='/hraddemployee'> <button className="btn btn-primary mb-50 wb-25"> Add Employee</button></a>
+                    <a href='/hrsidebar'><button className='btn btn-primary position-relative' style={{marginLeft:10}}>Back to Dashboard</button></a>
                 </div>
                 <br></br>
                 <div className="container">
