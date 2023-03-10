@@ -7,6 +7,7 @@ import EmployeeEvents from '../Employee/EmployeeEvents';
 import EmployeeDashboard from '../Employee/EmployeeDashboard';
 import EmployeeIssues from '../Employee/EmployeeIssues';
 import EmployeeLeaves from '../Employee/EmployeeLeaves';
+import EmployeeDocuments from '../Employee/EmployeeDocuments';
 
 export default function EmployeeSideBar() {
     const navigate = useNavigate();
@@ -23,18 +24,23 @@ export default function EmployeeSideBar() {
                                 <span class="fs-5 d-none d-sm-inline">Employee Dashboard</span>
                             </a>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                            <li class="nav-item">
+                                    <button class="nav-link align-middle px-0" onClick={() => { setMenu("EmployeeDocuments") }}>
+                                        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Upload Documents</span>
+                                    </button>
+                                </li>
                                 <li class="nav-item">
                                     <button class="nav-link align-middle px-0" onClick={() => { setMenu("EmployeeLeaves") }}>
-                                        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Leaves</span>
+                                        <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Apply Leaves</span>
                                     </button>
                                 </li>
                                 <li>
                                     <button class="nav-link px-0 align-middle" onClick={() => { setMenu("EmployeeEvents") }}>
-                                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Events</span></button>
+                                        <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">View Events</span></button>
                                 </li>
                                 <li>
                                     <button class="nav-link px-0 align-middle" onClick={() => { setMenu("EmployeeIssues") }}>
-                                        <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Issues</span> </button>
+                                        <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Report Issues</span> </button>
                                 </li>
                                 <li>
                                     <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
@@ -63,6 +69,7 @@ export default function EmployeeSideBar() {
                     </div>
                     <div class="col py-3">
                         {menu === "EmployeeDashboard" && <EmployeeDashboard object={EmpObject} />}
+                        {menu === "EmployeeDocuments" && <EmployeeDocuments />}
                         {menu === "EmployeeLeaves" && <EmployeeLeaves />}
                         {menu === "EmployeeEvents" && <EmployeeEvents />}
                         {menu === "EmployeeIssues" && <EmployeeIssues />}
